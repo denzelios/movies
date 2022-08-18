@@ -14,11 +14,11 @@ struct SearchResponse: Codable{
     }
 }
 
-struct Movie: Codable{
+struct Movie: Codable {
     var title: String?
     var year: String?
     var poster: String?
-    private enum CodingKeys: String, CodingKey{
+        enum CodingKeys: String, CodingKey{
         case title = "Title"
         case year = "Year"
         case poster = "Poster"
