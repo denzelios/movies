@@ -7,13 +7,13 @@
 
 import UIKit
 
-class DetailedView: UIViewController {
+class DetailedViewController: UIViewController {
     
-    let yearLabel = UILabel()
-    let titleLabel = UILabel()
-    let imageView = UIImageView()
-    let scrollView = UIScrollView()
-    let contentView = UIView()
+    private let yearLabel = UILabel()
+    private let titleLabel = UILabel()
+    private var imageView = UIImageView()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     var movie: Movie? {
         didSet {
             update()
@@ -22,7 +22,7 @@ class DetailedView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setupViewConstraints()
         contentView.backgroundColor = .white
         scrollView.backgroundColor = .white
         titleLabel.textAlignment = .center
@@ -35,13 +35,13 @@ class DetailedView: UIViewController {
         yearLabel.numberOfLines = 0
     }
     
-    private func setupView() {
+    private func setupViewConstraints() {
         
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(contentView)
-        self.contentView.addSubview(imageView)
-        self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(yearLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(imageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(yearLabel)
         
         yearLabel.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,9 +83,13 @@ class DetailedView: UIViewController {
     }
     
     private func update() {
+        
         guard let movie = movie else {
             return
         }
+        
+        titleLabel.text = movie.title
+        yearLabel.text =  movie.year
         
         if let urlString = movie.poster {
             NetworkService().request(urlString: urlString) { [weak self] result in
@@ -96,12 +100,10 @@ class DetailedView: UIViewController {
                         self?.imageView.image = image
                     }
                 case .failure:
-                    print("ERROR")
+                    print("Some ERROR")
                 }
             }
         }
-        titleLabel.text = movie.title
-        yearLabel.text =  movie.year
     }
     
 }

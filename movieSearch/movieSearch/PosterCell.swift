@@ -9,10 +9,9 @@ import UIKit
 
 class PosterCell: UICollectionViewCell {
     
-    
-    var lable = UILabel()
+    var label = UILabel()
     static let reuseId = "PosterCell"
-    var searchResponse:SearchResponse? = nil
+    var searchResponse: SearchResponse? = nil
 
     override var reuseIdentifier: String? {
         PosterCell.reuseId
@@ -27,14 +26,8 @@ class PosterCell: UICollectionViewCell {
         return imageView
     }()
     
-    var posterImage: Movie!{
-        didSet{
-            let posterUrl = posterImage.poster
-        }
-    }
-    
     var url: URL? {
-        didSet{
+        didSet {
             downloadPoster()
         }
     }
@@ -61,33 +54,35 @@ class PosterCell: UICollectionViewCell {
         upDateSelectedState()
         setupPosterImageview()
         
-        lable.textAlignment = .center
-        lable.textColor = .black
-        lable.backgroundColor = .white
-        lable.font = UIFont.systemFont(ofSize: 18)
-        lable.numberOfLines = 0
-    }
-    
-    private func setupPosterImageview() {
-        addSubview(posterImageView)
-        addSubview(lable)
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        
-        [posterImageView.topAnchor.constraint(equalTo: topAnchor),
-         posterImageView.leftAnchor.constraint(equalTo: leftAnchor),
-         posterImageView.rightAnchor.constraint(equalTo: rightAnchor),
-         posterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)] .forEach {$0.isActive = true}
-        
-        [lable.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
-         lable.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-         lable.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
-         lable.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)].forEach { $0.isActive = true}
+        label.textAlignment = .center
+        label.textColor = .black
+        label.backgroundColor = .white
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.numberOfLines = 0
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private func setupPosterImageview() {
+        addSubview(posterImageView)
+        addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+        posterImageView.topAnchor.constraint(equalTo: topAnchor),
+         posterImageView.leftAnchor.constraint(equalTo: leftAnchor),
+         posterImageView.rightAnchor.constraint(equalTo: rightAnchor),
+         posterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)])
+        
+    NSLayoutConstraint.activate([
+        label.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
+         label.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+         label.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)])
+    }
+    
     func downloadPoster() {
         guard let url = url else {
             return
@@ -96,8 +91,9 @@ class PosterCell: UICollectionViewCell {
         NetworkService().request(urlString: url.absoluteString) { [weak self] result in
             switch result {
             case let .success(data):
+                let image = UIImage(data: data)
                 DispatchQueue.main.async {
-                    self?.posterImageView.image = UIImage(data: data)
+                    self?.posterImageView.image = image
                 }
             case let .failure(error):
                 print(error)

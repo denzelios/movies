@@ -7,13 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    var collectionView: UICollectionView! = nil
-    let networkDataFetcher = NetwordDataFetcher()
-    var searchResponse:SearchResponse? = nil
-    let searchController = UISearchController(searchResultsController: nil)
-    let lbl = UILabel()
-    var timer: Timer? = nil
+class InitialWindow: UIViewController {
+    
+   private var collectionView: UICollectionView! = nil
+    private  let networkDataFetcher = NetworkDataFetcher()
+    private var searchResponse:SearchResponse? = nil
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let lbl = UILabel()
+    private var timer: Timer? = nil
     
     private var poster = [Movie]()
     
@@ -35,16 +36,18 @@ class ViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        [lbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 400),
+        NSLayoutConstraint.activate([
+         lbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 400),
          lbl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1),
          lbl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 1),
          lbl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
-         lbl.heightAnchor.constraint(equalToConstant: 120)].forEach { $0.isActive = true }
+         lbl.heightAnchor.constraint(equalToConstant: 120)])
         
-        [collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 40),
+        NSLayoutConstraint.activate([
+         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 40),
          collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
          collectionView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -25),
-         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)].forEach { $0.isActive = true }
+         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
     }
     
     private func setupSearchBar() {
@@ -74,7 +77,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension InitialWindow: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCell.reuseId, for: indexPath) as? PosterCell else {
@@ -94,12 +97,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         lbl.isHidden = true
         cell.url = movieUrl
         let title = movie?.title
-        cell.lable.text = title
+        cell.label.text = title
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailedView = DetailedView()
+        let detailedView = DetailedViewController()
         let movie = searchResponse?.movies[indexPath.item]
         detailedView.movie = movie
         self.navigationController?.pushViewController(detailedView, animated: true)
@@ -110,13 +113,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension InitialWindow: UISearchBarDelegate {
     func searchBar(_ searchBAr: UISearchBar, textDidChange searchText: String){
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
             self?.loadData(text: searchText)
         })
-        return
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -126,7 +128,7 @@ extension ViewController: UISearchBarDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout{
+extension InitialWindow: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = collectionView.bounds.width
         let itemWidth = (screenWidth - 16) / 2
