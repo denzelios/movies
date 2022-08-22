@@ -100,7 +100,7 @@ class DetailedViewController: UIViewController {
                         self?.imageView.image = image
                     }
                 case .failure:
-                    print("Some ERROR")
+                    self?.imageView.image = UIImage(named: "play.slash")
                 }
             }
         }
