@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     
     private var poster = [Movie]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -33,8 +32,6 @@ class ViewController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(lbl)
         
-        
-        
         lbl.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -48,8 +45,8 @@ class ViewController: UIViewController {
          collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
          collectionView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -25),
          collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)].forEach { $0.isActive = true }
-        
     }
+    
     private func setupSearchBar() {
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
@@ -72,11 +69,9 @@ class ViewController: UIViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(collectionView)
         collectionView.register(PosterCell.self, forCellWithReuseIdentifier: PosterCell.reuseId)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -86,9 +81,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
             return UICollectionViewCell()
         }
         
-        let movie = searchResponse?.movies[indexPath.item].poster
+        let movie = searchResponse?.movies[indexPath.item]
+        let poster = movie?.poster
         var movieUrl: URL?
-        if let nonOptionalMovie = movie {
+        if let nonOptionalMovie = poster {
             movieUrl = URL(string: nonOptionalMovie)
         }
         
@@ -97,17 +93,16 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         cell.layer.cornerRadius = 15
         lbl.isHidden = true
         cell.url = movieUrl
-        let lableText = searchResponse?.movies[indexPath.item].title
-        cell.lable.text = lableText
+        let title = movie?.title
+        cell.lable.text = title
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailedView = DetailedView()
         let movie = searchResponse?.movies[indexPath.item]
         detailedView.movie = movie
-        self.navigationController?.pushViewController(detailedView, animated: true) 
+        self.navigationController?.pushViewController(detailedView, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection sectin: Int) -> Int{
@@ -136,16 +131,9 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
         let screenWidth = collectionView.bounds.width
         let itemWidth = (screenWidth - 16) / 2
         return CGSize.init(width: itemWidth, height: 200)
-        
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         20
     }
-    
 }
-
-
-

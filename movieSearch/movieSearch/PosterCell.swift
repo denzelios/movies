@@ -66,13 +66,13 @@ class PosterCell: UICollectionViewCell {
         lable.backgroundColor = .white
         lable.font = UIFont.systemFont(ofSize: 18)
         lable.numberOfLines = 0
-    
     }
     
     private func setupPosterImageview() {
         addSubview(posterImageView)
         addSubview(lable)
         lable.translatesAutoresizingMaskIntoConstraints = false
+        
         [posterImageView.topAnchor.constraint(equalTo: topAnchor),
          posterImageView.leftAnchor.constraint(equalTo: leftAnchor),
          posterImageView.rightAnchor.constraint(equalTo: rightAnchor),
@@ -105,7 +105,3 @@ class PosterCell: UICollectionViewCell {
         }
     }
 }
-
-
-
-
