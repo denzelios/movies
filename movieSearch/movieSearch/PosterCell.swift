@@ -33,9 +33,8 @@ class PosterCell: UICollectionViewCell {
     }
     
     override var isSelected: Bool{
-        didSet{
-            upDateSelectedState()
-            
+        didSet {
+            updateSelectedState()
         }
     }
     
@@ -44,14 +43,14 @@ class PosterCell: UICollectionViewCell {
         posterImageView.image = nil
     }
     
-    private func upDateSelectedState(){
+    private func updateSelectedState(){
         posterImageView.alpha = isSelected ? 0.7 : 1
     }
     
     override init(frame:CGRect){
         super.init(frame: frame)
         
-        upDateSelectedState()
+        updateSelectedState()
         setupPosterImageview()
         
         label.textAlignment = .center
@@ -71,13 +70,13 @@ class PosterCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        posterImageView.topAnchor.constraint(equalTo: topAnchor),
+         posterImageView.topAnchor.constraint(equalTo: topAnchor),
          posterImageView.leftAnchor.constraint(equalTo: leftAnchor),
          posterImageView.rightAnchor.constraint(equalTo: rightAnchor),
          posterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)])
         
-    NSLayoutConstraint.activate([
-        label.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
+        NSLayoutConstraint.activate([
+         label.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
          label.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
          label.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
          label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)])
@@ -97,6 +96,9 @@ class PosterCell: UICollectionViewCell {
                 }
             case let .failure(error):
                 print(error)
+                DispatchQueue.main.async {
+                    self?.posterImageView.image = UIImage(named:"play.slash")
+                }
             }
         }
     }

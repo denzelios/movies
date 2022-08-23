@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InitialWindow: UIViewController {
+class SearchViewController: UIViewController {
     
    private var collectionView: UICollectionView! = nil
     private  let networkDataFetcher = NetworkDataFetcher()
@@ -77,7 +77,7 @@ class InitialWindow: UIViewController {
     }
 }
 
-extension InitialWindow: UICollectionViewDelegate, UICollectionViewDataSource{
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCell.reuseId, for: indexPath) as? PosterCell else {
@@ -113,7 +113,7 @@ extension InitialWindow: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 
-extension InitialWindow: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBAr: UISearchBar, textDidChange searchText: String){
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
@@ -128,7 +128,7 @@ extension InitialWindow: UISearchBarDelegate {
     }
 }
 
-extension InitialWindow: UICollectionViewDelegateFlowLayout{
+extension SearchViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = collectionView.bounds.width
         let itemWidth = (screenWidth - 16) / 2

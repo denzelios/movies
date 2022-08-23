@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5C7D91C4289BCEE900A2FC04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D91C3289BCEE900A2FC04 /* AppDelegate.swift */; };
 		5C7D91C6289BCEE900A2FC04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D91C5289BCEE900A2FC04 /* SceneDelegate.swift */; };
-		5C7D91C8289BCEE900A2FC04 /* InitialWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D91C7289BCEE900A2FC04 /* InitialWindow.swift */; };
+		5C7D91C8289BCEE900A2FC04 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D91C7289BCEE900A2FC04 /* SearchViewController.swift */; };
 		5C7D91CD289BCEEA00A2FC04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D91CC289BCEEA00A2FC04 /* Assets.xcassets */; };
 		5C7D91D0289BCEEA00A2FC04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D91CE289BCEEA00A2FC04 /* LaunchScreen.storyboard */; };
 		5C7D91DB289BCEEA00A2FC04 /* movieSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D91DA289BCEEA00A2FC04 /* movieSearchTests.swift */; };
@@ -43,7 +43,7 @@
 		5C7D91C0289BCEE900A2FC04 /* movieSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movieSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C7D91C3289BCEE900A2FC04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C7D91C5289BCEE900A2FC04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5C7D91C7289BCEE900A2FC04 /* InitialWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialWindow.swift; sourceTree = "<group>"; };
+		5C7D91C7289BCEE900A2FC04 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5C7D91CC289BCEEA00A2FC04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C7D91CF289BCEEA00A2FC04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C7D91D1289BCEEA00A2FC04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,10 +109,10 @@
 			children = (
 				5C7D91C3289BCEE900A2FC04 /* AppDelegate.swift */,
 				5C7D91C5289BCEE900A2FC04 /* SceneDelegate.swift */,
-				5C7D91C7289BCEE900A2FC04 /* InitialWindow.swift */,
+				5C7D91C7289BCEE900A2FC04 /* SearchViewController.swift */,
 				5CE5EB4128A643730014AE4C /* DetailedViewController.swift */,
 				5CE5EB3D28A395380014AE4C /* PosterCell.swift */,
-				5CA96F9B289D44ED00B89DD9 /* New Group */,
+				5CA96F9B289D44ED00B89DD9 /* NetworkServiceGroup */,
 				5C7D91CC289BCEEA00A2FC04 /* Assets.xcassets */,
 				5C7D91CE289BCEEA00A2FC04 /* LaunchScreen.storyboard */,
 				5C7D91D1289BCEEA00A2FC04 /* Info.plist */,
@@ -137,14 +137,14 @@
 			path = movieSearchUITests;
 			sourceTree = "<group>";
 		};
-		5CA96F9B289D44ED00B89DD9 /* New Group */ = {
+		5CA96F9B289D44ED00B89DD9 /* NetworkServiceGroup */ = {
 			isa = PBXGroup;
 			children = (
 				5CA96F97289D38A100B89DD9 /* NetworkService.swift */,
 				5CA96F9D289D453000B89DD9 /* NetworkDataFetcher.swift */,
 				5CA96F9C289D450C00B89DD9 /* Models */,
 			);
-			path = "New Group";
+			path = NetworkServiceGroup;
 			sourceTree = "<group>";
 		};
 		5CA96F9C289D450C00B89DD9 /* Models */ = {
@@ -285,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C7D91C8289BCEE900A2FC04 /* InitialWindow.swift in Sources */,
+				5C7D91C8289BCEE900A2FC04 /* SearchViewController.swift in Sources */,
 				5CE5EB4228A643730014AE4C /* DetailedViewController.swift in Sources */,
 				5CA96F9A289D422900B89DD9 /* SearchResponse.swift in Sources */,
 				5C7D91C4289BCEE900A2FC04 /* AppDelegate.swift in Sources */,

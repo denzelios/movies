@@ -100,7 +100,9 @@ class DetailedViewController: UIViewController {
                         self?.imageView.image = image
                     }
                 case .failure:
-                    self?.imageView.image = UIImage(named: "play.slash")
+                    DispatchQueue.main.async {
+                        self?.imageView.image = UIImage(named: "play.slash")
+                    }
                 }
             }
         }
